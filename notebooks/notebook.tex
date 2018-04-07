@@ -1,0 +1,1672 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Labs}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{numpy} \PY{k}{import} \PY{n}{linalg}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{mlab} \PY{k}{as} \PY{n+nn}{mlab}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{stats}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{linear\PYZus{}model}
+        
+        \PY{k+kn}{from} \PY{n+nn}{pprint} \PY{k}{import} \PY{n}{pprint}
+\end{Verbatim}
+
+
+    \hypertarget{lab-1}{%
+\section{Lab 1}\label{lab-1}}
+
+    \hypertarget{task-1}{%
+\subsection{Task 1}\label{task-1}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[} \PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{X1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{pprint}\PY{p}{(}\PY{n}{X1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+array([[1., 1.],
+       [1., 2.],
+       [1., 3.],
+       [1., 4.],
+       [1., 5.],
+       [1., 6.],
+       [1., 7.],
+       [1., 8.],
+       [1., 9.]])
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{X2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{l+m+mi}{1} \PY{o}{/} \PY{n}{X}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{pprint}\PY{p}{(}\PY{n}{X2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+array([[1.        , 1.        , 1.        ],
+       [1.        , 2.        , 0.5       ],
+       [1.        , 3.        , 0.33333333],
+       [1.        , 4.        , 0.25      ],
+       [1.        , 5.        , 0.2       ],
+       [1.        , 6.        , 0.16666667],
+       [1.        , 7.        , 0.14285714],
+       [1.        , 8.        , 0.125     ],
+       [1.        , 9.        , 0.11111111]])
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{X3} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{,} \PY{n}{X} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{X} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{pprint}\PY{p}{(}\PY{n}{X3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+array([[1.00000000e+00, 1.00000000e+00, 1.00000000e+00, 0.00000000e+00],
+       [1.00000000e+00, 4.00000000e+00, 8.00000000e+00, 6.93147181e-01],
+       [1.00000000e+00, 9.00000000e+00, 2.70000000e+01, 1.09861229e+00],
+       [1.00000000e+00, 1.60000000e+01, 6.40000000e+01, 1.38629436e+00],
+       [1.00000000e+00, 2.50000000e+01, 1.25000000e+02, 1.60943791e+00],
+       [1.00000000e+00, 3.60000000e+01, 2.16000000e+02, 1.79175947e+00],
+       [1.00000000e+00, 4.90000000e+01, 3.43000000e+02, 1.94591015e+00],
+       [1.00000000e+00, 6.40000000e+01, 5.12000000e+02, 2.07944154e+00],
+       [1.00000000e+00, 8.10000000e+01, 7.29000000e+02, 2.19722458e+00]])
+
+    \end{Verbatim}
+
+    \hypertarget{task-2}{%
+\subsection{Task 2}\label{task-2}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}excel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/ls\PYZus{}variants.xls}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sheet\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{вар. 15}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}           x          y
+        0  0.045826 -31.968642
+        1  0.046307 -31.649220
+        2  0.046788 -31.489306
+        3  0.047269 -31.573924
+        4  0.047750 -31.187285
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+        \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{,} \PY{n}{x}\PY{p}{,}  \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{3}\PY{p}{,} 
+                            \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{17} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,} 
+                            \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{17} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,}
+                            \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{33} \PY{o}{*} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.3}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{n} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{m} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,} \PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} array([[ 1.00000000e+00,  4.58255017e-02,  2.09997661e-03,
+                  9.62324817e-05,  1.04689171e+00, -3.08291454e+00,
+                  7.02592014e-01,  7.11592905e-01,  4.40990176e-06,
+                  3.50921280e-01],
+                [ 1.00000000e+00,  4.63065952e-02,  2.14430076e-03,
+                  9.92952670e-05,  1.04739549e+00, -3.07247088e+00,
+                  7.08388277e-01,  7.05822959e-01,  4.59802573e-06,
+                  3.36011237e-01],
+                [ 1.00000000e+00,  4.67876886e-02,  2.18908781e-03,
+                  1.02422359e-04,  1.04789950e+00, -3.06213517e+00,
+                  7.14137156e-01,  7.00005802e-01,  4.79210542e-06,
+                  3.21016504e-01],
+                [ 1.00000000e+00,  4.72687821e-02,  2.23433776e-03,
+                  1.05614424e-04,  1.04840376e+00, -3.05190520e+00,
+                  7.19838268e-01,  6.94141821e-01,  4.99226521e-06,
+                  3.05940861e-01],
+                [ 1.00000000e+00,  4.77498755e-02,  2.28005061e-03,
+                  1.08872133e-04,  1.04890826e+00, -3.04177882e+00,
+                  7.25491230e-01,  6.88231411e-01,  5.19863078e-06,
+                  2.90788106e-01]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{clf} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{n}{fit\PYZus{}intercept}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} LinearRegression(copy\_X=True, fit\_intercept=False, n\_jobs=1, normalize=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{y\PYZus{}predicted} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)} 
+         \PY{n}{e\PYZus{}all} \PY{o}{=} \PY{n}{y\PYZus{}predicted} \PY{o}{\PYZhy{}} \PY{n}{y}
+         \PY{n}{S} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{e\PYZus{}all} \PY{o}{*} \PY{n}{e\PYZus{}all}\PY{p}{)}
+         \PY{n}{R} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{e\PYZus{}all} \PY{o}{*} \PY{n}{e\PYZus{}all}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{coef} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{coef\PYZus{}}
+\end{Verbatim}
+
+
+    \hypertarget{ux43fux43eux43bux443ux447ux435ux43dux43dux430ux44f-ux440ux435ux433ux440ux435ux441ux441ux438ux44f}{%
+\subsubsection{Полученная
+регрессия}\label{ux43fux43eux43bux443ux447ux435ux43dux43dux430ux44f-ux440ux435ux433ux440ux435ux441ux441ux438ux44f}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y\PYZus{}predicted}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{ux43eux441ux442ux430ux442ux43aux438-ux438ux442ux43eux433-ux43fux440ux43eux441ux442ux43e-ux448ux443ux43c}{%
+\subsubsection{Остатки ( итог = просто
+шум)}\label{ux43eux441ux442ux430ux442ux43aux438-ux438ux442ux43eux433-ux43fux440ux43eux441ux442ux43e-ux448ux443ux43c}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{e\PYZus{}all}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{R}\PY{p}{,} \PY{n}{S}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.9996246283579703 18.371034879523094
+
+    \end{Verbatim}
+
+    \hypertarget{lab-2}{%
+\section{Lab 2}\label{lab-2}}
+
+    \hypertarget{task-1}{%
+\subsection{Task 1}\label{task-1}}
+
+    \hypertarget{ux43eux446ux435ux43dux43aux430-ux437ux43dux430ux447ux438ux43cux43eux441ux442ux438-ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux43eux432-ux440ux435ux433ux440ux435ux441ux441ux438ux438-ux43fux43e-ux43aux440ux438ux442ux435ux440ux438ux44e-ux441ux442ux44eux434ux435ux43dux442ux430}{%
+\subsubsection{Оценка значимости коэффициентов регрессии по критерию
+Стюдента}\label{ux43eux446ux435ux43dux43aux430-ux437ux43dux430ux447ux438ux43cux43eux441ux442ux438-ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux43eux432-ux440ux435ux433ux440ux435ux441ux441ux438ux438-ux43fux43e-ux43aux440ux438ux442ux435ux440ux438ux44e-ux441ux442ux44eux434ux435ux43dux442ux430}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{,} \PY{n}{x}\PY{p}{,}  \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{3}\PY{p}{,} 
+                             \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{17} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,} 
+                             \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{17} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,}
+                             \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{33} \PY{o}{*} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.3}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{n} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{m} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{clf} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{n}{fit\PYZus{}intercept}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} LinearRegression(copy\_X=True, fit\_intercept=False, n\_jobs=1, normalize=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{coef} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{coef\PYZus{}}
+\end{Verbatim}
+
+
+    \hypertarget{ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux44b-ux440ux435ux433ux440ux435ux441ux441ux438ux438}{%
+\subsubsection{Коэффициенты
+регрессии}\label{ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux44b-ux440ux435ux433ux440ux435ux441ux441ux438ux438}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{coef}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} array([[-8.56426715e+05],
+                [-8.54771980e+05],
+                [-4.35879484e+05],
+                [-1.23289467e+05],
+                [ 8.56250064e+05],
+                [-2.81626043e+01],
+                [-2.74172793e+00],
+                [ 9.86775276e+00],
+                [-5.69350741e+04],
+                [ 1.46617005e-01]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{y\PYZus{}predicted} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)} 
+         \PY{n}{e\PYZus{}all} \PY{o}{=} \PY{n}{y\PYZus{}predicted} \PY{o}{\PYZhy{}} \PY{n}{y}
+         \PY{n}{S} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{e\PYZus{}all} \PY{o}{*} \PY{n}{e\PYZus{}all}\PY{p}{)}
+         \PY{n}{R} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{e\PYZus{}all} \PY{o}{*} \PY{n}{e\PYZus{}all}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{sigma} \PY{o}{=} \PY{n}{S} \PY{o}{/} \PY{p}{(}\PY{n}{n} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{D} \PY{o}{=} \PY{n}{sigma} \PY{o}{*} \PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{)}
+         \PY{n}{D} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{D}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{t}
+         \PY{k+kn}{import} \PY{n+nn}{math}
+         \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.01}
+         \PY{n}{quantile} \PY{o}{=} \PY{n}{t}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{alpha}\PY{p}{,} \PY{n}{n} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{ux432ux435ux440ux43eux44fux442ux43dux43eux441ux442ux44c-ux43dux435ux437ux43dux430ux447ux438ux43cux43eux441ux442ux438-ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux430-ux440ux435ux433ux440ux435ux441ux441ux438ux438}{%
+\subsubsection{Вероятность незначимости коэффициента
+регрессии}\label{ux432ux435ux440ux43eux44fux442ux43dux43eux441ux442ux44c-ux43dux435ux437ux43dux430ux447ux438ux43cux43eux441ux442ux438-ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux430-ux440ux435ux433ux440ux435ux441ux441ux438ux438}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{k}{for} \PY{n}{b}\PY{p}{,} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{coef}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{D}\PY{p}{)}\PY{p}{:}
+             \PY{n}{t\PYZus{}s} \PY{o}{=} \PY{n}{b} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{c}\PY{p}{)}\PY{p}{)}
+             \PY{n}{t\PYZus{}s} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{t}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{t\PYZus{}s}\PY{p}{)}\PY{p}{,} \PY{n}{df}\PY{o}{=}\PY{n}{n} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{t\PYZus{}s}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+
+    \end{Verbatim}
+
+    \hypertarget{task-2}{%
+\subsection{Task 2}\label{task-2}}
+
+    \hypertarget{ux43eux446ux435ux43dux43aux430-ux437ux43dux430ux447ux438ux43cux43eux441ux442ux438-ux433ux440ux443ux43fux43fux44b-ux444ux430ux43aux442ux43eux440ux43eux432-ux43fux43e-ux43aux440ux438ux442ux435ux440ux438ux44e-ux444ux438ux448ux435ux440ux430}{%
+\subsubsection{Оценка значимости группы факторов по критерию
+Фишера}\label{ux43eux446ux435ux43dux43aux430-ux437ux43dux430ux447ux438ux43cux43eux441ux442ux438-ux433ux440ux443ux43fux43fux44b-ux444ux430ux43aux442ux43eux440ux43eux432-ux43fux43e-ux43aux440ux438ux442ux435ux440ux438ux44e-ux444ux438ux448ux435ux440ux430}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{,} \PY{n}{x}\PY{p}{,}  \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{3}\PY{p}{,} 
+                             \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{17} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,} 
+                             \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{17} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,}
+                             \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{33} \PY{o}{*} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.3}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{X\PYZus{}P} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{,} \PY{n}{x}\PY{p}{,}  \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{3}\PY{p}{,} 
+                             \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{17} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,} 
+                             \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{17} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,}
+                             \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{33} \PY{o}{*} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.3}\PY{p}{)}\PY{p}{,} 
+                             \PY{n}{np}\PY{o}{.}\PY{n}{tan}\PY{p}{(}\PY{l+m+mi}{20} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{10} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{n} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{m} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         
+         \PY{n}{n\PYZus{}p} \PY{o}{=} \PY{n}{X\PYZus{}P}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{m\PYZus{}p} \PY{o}{=} \PY{n}{X\PYZus{}P}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{clf} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{n}{fit\PYZus{}intercept}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} LinearRegression(copy\_X=True, fit\_intercept=False, n\_jobs=1, normalize=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{coef} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{coef\PYZus{}}
+\end{Verbatim}
+
+
+    \hypertarget{ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux44b-ux440ux435ux433ux440ux435ux441ux441ux438ux438}{%
+\subsubsection{Коэффициенты
+регрессии}\label{ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux44b-ux440ux435ux433ux440ux435ux441ux441ux438ux438}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{clf} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{n}{fit\PYZus{}intercept}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         
+         \PY{n}{clf\PYZus{}p} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{n}{fit\PYZus{}intercept}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{clf\PYZus{}p}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}P}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} LinearRegression(copy\_X=True, fit\_intercept=False, n\_jobs=1, normalize=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{y\PYZus{}predicted} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)} 
+         \PY{n}{e\PYZus{}all} \PY{o}{=} \PY{n}{y\PYZus{}predicted} \PY{o}{\PYZhy{}} \PY{n}{y}
+         \PY{n}{S} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{e\PYZus{}all} \PY{o}{*} \PY{n}{e\PYZus{}all}\PY{p}{)}
+         \PY{n}{R} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{e\PYZus{}all} \PY{o}{*} \PY{n}{e\PYZus{}all}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{sigma} \PY{o}{=} \PY{n}{S} \PY{o}{/} \PY{p}{(}\PY{n}{n} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{y\PYZus{}predicted\PYZus{}p} \PY{o}{=} \PY{n}{clf\PYZus{}p}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}P}\PY{p}{)} 
+         \PY{n}{e\PYZus{}all\PYZus{}p} \PY{o}{=} \PY{n}{y\PYZus{}predicted\PYZus{}p} \PY{o}{\PYZhy{}} \PY{n}{y}
+         \PY{n}{S\PYZus{}p} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{e\PYZus{}all\PYZus{}p} \PY{o}{*} \PY{n}{e\PYZus{}all\PYZus{}p}\PY{p}{)}
+         \PY{n}{R\PYZus{}p} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{e\PYZus{}all\PYZus{}p} \PY{o}{*} \PY{n}{e\PYZus{}all\PYZus{}p}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{sigma\PYZus{}p} \PY{o}{=} \PY{n}{S\PYZus{}p} \PY{o}{/} \PY{p}{(}\PY{n}{n} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{m\PYZus{}p}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} 12
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{m}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:} 10
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{R\PYZus{}p}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} 0.9996247204968086
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{R}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} 0.9996246283579703
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{F} \PY{o}{=} \PY{p}{(}\PY{n}{S} \PY{o}{\PYZhy{}} \PY{n}{S\PYZus{}p}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{m\PYZus{}p} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{p}{)} \PY{o}{*} \PY{n}{S\PYZus{}p} \PY{o}{/} \PY{p}{(}\PY{n}{n} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{f}
+         \PY{k+kn}{import} \PY{n+nn}{math}
+         \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.01}
+\end{Verbatim}
+
+
+    \hypertarget{ux432ux435ux440ux43eux44fux442ux43dux43eux441ux442ux44c-ux43dux435ux437ux43dux430ux447ux438ux43cux43eux441ux442ux438-ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux430-ux440ux435ux433ux440ux435ux441ux441ux438ux438}{%
+\subsubsection{Вероятность незначимости коэффициента
+регрессии}\label{ux432ux435ux440ux43eux44fux442ux43dux43eux441ux442ux44c-ux43dux435ux437ux43dux430ux447ux438ux43cux43eux441ux442ux438-ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux430-ux440ux435ux433ux440ux435ux441ux441ux438ux438}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{F\PYZus{}S} \PY{o}{=} \PY{n}{f}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{alpha}\PY{p}{,} \PY{n}{dfn}\PY{o}{=}\PY{n}{m\PYZus{}p}\PY{o}{\PYZhy{}}\PY{n}{m}\PY{p}{,} \PY{n}{dfd}\PY{o}{=}\PY{n}{m}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Статистика }\PY{l+s+si}{\PYZob{}F\PYZus{}S\PYZcb{}}\PY{l+s+s1}{ \PYZlt{} }\PY{l+s+si}{\PYZob{}F\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{F}\PY{o}{=}\PY{n}{F\PYZus{}S}\PY{p}{,} \PY{n}{F\PYZus{}S}\PY{o}{=}\PY{n}{F}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Статистика 3.1587060565104555e-05 < 7.559432157547899
+
+    \end{Verbatim}
+
+    \hypertarget{ux433ux438ux43fux43eux442ux435ux437ux430-ux43e-ux43dux435ux437ux43dux430ux447ux438ux43cux43eux441ux442ux438-ux43dux43eux432ux44bux445-ux444ux430ux43aux442ux43eux440ux43eux432-ux43dux435-ux43eux442ux432ux435ux440ux433ux430ux435ux442ux441ux44f-ux437ux43dux430ux447ux438ux442-ux43fux43eux441ux442ux440ux43eux438ux43c-ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux44bux439-ux438ux43dux442ux435ux440ux432ux430ux43b}{%
+\subsubsection{Гипотеза о незначимости новых факторов не отвергается,
+значит построим доверительный
+интервал}\label{ux433ux438ux43fux43eux442ux435ux437ux430-ux43e-ux43dux435ux437ux43dux430ux447ux438ux43cux43eux441ux442ux438-ux43dux43eux432ux44bux445-ux444ux430ux43aux442ux43eux440ux43eux432-ux43dux435-ux43eux442ux432ux435ux440ux433ux430ux435ux442ux441ux44f-ux437ux43dux430ux447ux438ux442-ux43fux43eux441ux442ux440ux43eux438ux43c-ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux44bux439-ux438ux43dux442ux435ux440ux432ux430ux43b}}
+
+    \hypertarget{task-3}{%
+\subsection{Task 3}\label{task-3}}
+
+    \hypertarget{ux441ux43eux432ux43cux435ux441ux442ux43dux430ux44f-ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux430ux44f-ux43eux431ux43bux430ux441ux442ux44c}{%
+\subsubsection{Совместная доверительная
+область}\label{ux441ux43eux432ux43cux435ux441ux442ux43dux430ux44f-ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux430ux44f-ux43eux431ux43bux430ux441ux442ux44c}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{,} \PY{n}{x}\PY{p}{,}  \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{3}\PY{p}{,} 
+                             \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{17} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,} 
+                             \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{17} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,}
+                             \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{33} \PY{o}{*} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.3}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{n} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{m} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{clf} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{n}{fit\PYZus{}intercept}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}43}]:} LinearRegression(copy\_X=True, fit\_intercept=False, n\_jobs=1, normalize=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{coef} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{coef\PYZus{}}
+\end{Verbatim}
+
+
+    \hypertarget{ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux44b-ux440ux435ux433ux440ux435ux441ux441ux438ux438}{%
+\subsubsection{Коэффициенты
+регрессии}\label{ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux44b-ux440ux435ux433ux440ux435ux441ux441ux438ux438}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{coef}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}45}]:} array([[-8.56426715e+05],
+                [-8.54771980e+05],
+                [-4.35879484e+05],
+                [-1.23289467e+05],
+                [ 8.56250064e+05],
+                [-2.81626043e+01],
+                [-2.74172793e+00],
+                [ 9.86775276e+00],
+                [-5.69350741e+04],
+                [ 1.46617005e-01]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{y\PYZus{}predicted} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)} 
+         \PY{n}{e\PYZus{}all} \PY{o}{=} \PY{n}{y\PYZus{}predicted} \PY{o}{\PYZhy{}} \PY{n}{y}
+         \PY{n}{S} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{e\PYZus{}all} \PY{o}{*} \PY{n}{e\PYZus{}all}\PY{p}{)}
+         \PY{n}{R} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{e\PYZus{}all} \PY{o}{*} \PY{n}{e\PYZus{}all}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{sigma} \PY{o}{=} \PY{n}{S} \PY{o}{/} \PY{p}{(}\PY{n}{n} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{D} \PY{o}{=} \PY{n}{sigma} \PY{o}{*} \PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{)}
+         \PY{n}{A} \PY{o}{=} \PY{n}{D}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+         \PY{n}{p} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+         \PY{n}{k} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{p}\PY{p}{)}
+         \PY{n}{z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{column\PYZus{}stack}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{p}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{p}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.01}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{quantile\PYZus{}t} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{f}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{alpha}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{n} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{B} \PY{o}{=} \PY{n}{linalg}\PY{o}{.}\PY{n}{cholesky}\PY{p}{(}\PY{n}{A}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{coords} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{k}{for} \PY{n}{index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+             \PY{n}{result} \PY{o}{=} \PY{n}{quantile\PYZus{}t} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{B}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{z}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{index}\PY{p}{]}\PY{p}{)}
+             \PY{n}{coords}\PY{p}{[}\PY{n}{index}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{result} \PY{o}{+} \PY{n}{coef}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{quantile} \PY{o}{=} \PY{n}{t}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{alpha}\PY{p}{,} \PY{n}{n} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{A}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{betta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{coef}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{quantile}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                           \PY{n}{coef}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{quantile}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} 
+                           \PY{n}{coef}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{quantile}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} 
+                           \PY{n}{coef}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{quantile}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} 
+                           \PY{n}{coef}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{quantile}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{,} 
+                          \PY{p}{[}\PY{n}{coef}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{quantile}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} 
+                           \PY{n}{coef}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{quantile}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} 
+                           \PY{n}{coef}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{quantile}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} 
+                           \PY{n}{coef}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{quantile}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} 
+                           \PY{n}{coef}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{quantile}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{coords}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{coords}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{coords}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{coords}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{betta}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{betta}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_71_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_71_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{task-4}{%
+\subsection{Task 4}\label{task-4}}
+
+    \hypertarget{ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux44bux435-ux438ux43dux442ux435ux440ux432ux430ux43bux44b-ux434ux43bux44f-ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux43eux432-ux440ux435ux433ux440ux435ux441ux441ux438ux438}{%
+\subsubsection{Доверительные интервалы для коэффициентов
+регрессии}\label{ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux44bux435-ux438ux43dux442ux435ux440ux432ux430ux43bux44b-ux434ux43bux44f-ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux43eux432-ux440ux435ux433ux440ux435ux441ux441ux438ux438}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{,} \PY{n}{x}\PY{p}{,}  \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{3}\PY{p}{,} 
+                             \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{17} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,} 
+                             \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{17} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,}
+                             \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{33} \PY{o}{*} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.3}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{n} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{m} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{clf} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{n}{fit\PYZus{}intercept}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}57}]:} LinearRegression(copy\_X=True, fit\_intercept=False, n\_jobs=1, normalize=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{coef} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{coef\PYZus{}}
+\end{Verbatim}
+
+
+    \hypertarget{ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux44b-ux440ux435ux433ux440ux435ux441ux441ux438ux438}{%
+\subsubsection{Коэффициенты
+регрессии}\label{ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux44b-ux440ux435ux433ux440ux435ux441ux441ux438ux438}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{coef}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}59}]:} array([[-8.56426715e+05],
+                [-8.54771980e+05],
+                [-4.35879484e+05],
+                [-1.23289467e+05],
+                [ 8.56250064e+05],
+                [-2.81626043e+01],
+                [-2.74172793e+00],
+                [ 9.86775276e+00],
+                [-5.69350741e+04],
+                [ 1.46617005e-01]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n}{y\PYZus{}predicted} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)} 
+         \PY{n}{e\PYZus{}all} \PY{o}{=} \PY{n}{y\PYZus{}predicted} \PY{o}{\PYZhy{}} \PY{n}{y}
+         \PY{n}{S} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{e\PYZus{}all} \PY{o}{*} \PY{n}{e\PYZus{}all}\PY{p}{)}
+         \PY{n}{R} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{e\PYZus{}all} \PY{o}{*} \PY{n}{e\PYZus{}all}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{sigma} \PY{o}{=} \PY{n}{S} \PY{o}{/} \PY{p}{(}\PY{n}{n} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n}{D} \PY{o}{=} \PY{n}{sigma} \PY{o}{*} \PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{)}
+         \PY{n}{D} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{D}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{t}
+         \PY{k+kn}{import} \PY{n+nn}{math}
+         \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.05}
+         \PY{n}{dj} \PY{o}{=} \PY{n}{t}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{alpha} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{df}\PY{o}{=}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{n}{m}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{D}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{confidence\PYZus{}interval} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{column\PYZus{}stack}\PY{p}{(}\PY{p}{(}\PY{n}{coef}\PY{o}{.}\PY{n}{T} \PY{o}{\PYZhy{}} \PY{n}{dj}\PY{p}{,} \PY{n}{coef}\PY{o}{.}\PY{n}{T} \PY{o}{+} \PY{n}{dj}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux44bux435-ux438ux43dux442ux435ux440ux432ux430ux43bux44b-ux434ux43bux44f-ux43aux430ux436ux434ux43eux433ux43e-ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux430-ux440ux435ux433ux440ux435ux441ux441ux438ux438}{%
+\paragraph{Доверительные интервалы для каждого коэффициента
+регрессии}\label{ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux44bux435-ux438ux43dux442ux435ux440ux432ux430ux43bux44b-ux434ux43bux44f-ux43aux430ux436ux434ux43eux433ux43e-ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux430-ux440ux435ux433ux440ux435ux441ux441ux438ux438}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{confidence\PYZus{}interval}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}64}]:} array([[-8.97094937e+05, -8.15758494e+05],
+                [-8.95380823e+05, -8.14163137e+05],
+                [-4.56475327e+05, -4.15283641e+05],
+                [-1.29362309e+05, -1.17216624e+05],
+                [ 8.15588729e+05,  8.96911398e+05],
+                [-3.00786280e+01, -2.62465806e+01],
+                [-2.83440395e+00, -2.64905190e+00],
+                [ 9.80592092e+00,  9.92958461e+00],
+                [-5.94914582e+04, -5.43786900e+04],
+                [ 1.34672814e-01,  1.58561196e-01]])
+\end{Verbatim}
+            
+    \hypertarget{ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux44b-ux440ux435ux433ux440ux435ux441ux441ux438ux438}{%
+\paragraph{Коэффициенты
+регрессии}\label{ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux44b-ux440ux435ux433ux440ux435ux441ux441ux438ux438}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{coef}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}65}]:} array([[-8.56426715e+05],
+                [-8.54771980e+05],
+                [-4.35879484e+05],
+                [-1.23289467e+05],
+                [ 8.56250064e+05],
+                [-2.81626043e+01],
+                [-2.74172793e+00],
+                [ 9.86775276e+00],
+                [-5.69350741e+04],
+                [ 1.46617005e-01]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{coef\PYZus{}rounded} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{9} \PY{o}{*} \PY{l+m+mf}{1e+5}\PY{p}{,} 
+                                    \PY{o}{\PYZhy{}}\PY{l+m+mi}{9} \PY{o}{*} \PY{l+m+mf}{1e+5}\PY{p}{,} 
+                                    \PY{o}{\PYZhy{}}\PY{l+m+mi}{4} \PY{o}{*} \PY{l+m+mf}{1e+5}\PY{p}{,} 
+                                    \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o}{*} \PY{l+m+mf}{1e+5}\PY{p}{,} 
+                                    \PY{l+m+mi}{9} \PY{o}{*} \PY{l+m+mf}{1e+5}\PY{p}{,} 
+                                    \PY{o}{\PYZhy{}}\PY{l+m+mi}{3} \PY{o}{*} \PY{l+m+mf}{1e+1}\PY{p}{,} 
+                                    \PY{o}{\PYZhy{}}\PY{l+m+mi}{3} \PY{o}{*} \PY{l+m+mf}{1e+0}\PY{p}{,} 
+                                    \PY{l+m+mi}{10} \PY{o}{*} \PY{l+m+mf}{1e+0}\PY{p}{,} 
+                                    \PY{o}{\PYZhy{}}\PY{l+m+mi}{6} \PY{o}{*} \PY{l+m+mf}{1e+4}\PY{p}{,} 
+                                    \PY{l+m+mi}{1} \PY{o}{*} \PY{l+m+mf}{1e\PYZhy{}1}\PY{p}{]} \PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{confidence\PYZus{}interval\PYZus{}rounded} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{column\PYZus{}stack}\PY{p}{(}\PY{p}{(}\PY{n}{coef\PYZus{}rounded}\PY{o}{.}\PY{n}{T} \PY{o}{\PYZhy{}} \PY{n}{dj}\PY{p}{,} \PY{n}{coef\PYZus{}rounded}\PY{o}{.}\PY{n}{T} \PY{o}{+} \PY{n}{dj}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{n}{confidence\PYZus{}interval\PYZus{}rounded}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}68}]:} array([[-9.40668221e+05, -8.59331779e+05],
+                [-9.40608843e+05, -8.59391157e+05],
+                [-4.20595843e+05, -3.79404157e+05],
+                [-1.06072842e+05, -9.39271577e+04],
+                [ 8.59338665e+05,  9.40661335e+05],
+                [-3.19160237e+01, -2.80839763e+01],
+                [-3.09267603e+00, -2.90732397e+00],
+                [ 9.93816816e+00,  1.00618318e+01],
+                [-6.25563841e+04, -5.74436159e+04],
+                [ 8.80558089e-02,  1.11944191e-01]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{confidence\PYZus{}interval\PYZus{}rounded}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}69}]:} array([[-9.406682e+05, -8.593318e+05],
+                [-9.406088e+05, -8.593912e+05],
+                [-4.205958e+05, -3.794042e+05],
+                [-1.060728e+05, -9.392720e+04],
+                [ 8.593387e+05,  9.406613e+05],
+                [-3.190000e+01, -2.810000e+01],
+                [-3.100000e+00, -2.900000e+00],
+                [ 9.900000e+00,  1.010000e+01],
+                [-6.255640e+04, -5.744360e+04],
+                [ 1.000000e-01,  1.000000e-01]])
+\end{Verbatim}
+            
+    \hypertarget{ux440ux430ux437ux43dux438ux446ux430-ux434ux43e-ux438-ux43fux43eux441ux43bux435-ux43eux43aux440ux443ux433ux43bux435ux43dux438ux44f-ux441-ux438ux437ux43dux430ux447ux430ux43bux44cux43dux43e-ux43dux430ux439ux434ux435ux43dux44bux43cux438-ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux430ux43cux438-ux440ux435ux433ux440ux435ux441ux441ux438ux438}{%
+\paragraph{Разница до и после округления с изначально найдеными
+коэффициентами
+регрессии}\label{ux440ux430ux437ux43dux438ux446ux430-ux434ux43e-ux438-ux43fux43eux441ux43bux435-ux43eux43aux440ux443ux433ux43bux435ux43dux438ux44f-ux441-ux438ux437ux43dux430ux447ux430ux43bux44cux43dux43e-ux43dux430ux439ux434ux435ux43dux44bux43cux438-ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux430ux43cux438-ux440ux435ux433ux440ux435ux441ux441ux438ux438}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{k}{for} \PY{n}{num} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{)}\PY{p}{:}
+             \PY{n}{coef\PYZus{}temp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{coef}\PY{p}{,} \PY{n}{num}\PY{p}{)}
+             \PY{n}{clf}\PY{o}{.}\PY{n}{coef\PYZus{}} \PY{o}{=} \PY{n}{coef\PYZus{}temp}
+             
+             \PY{n}{y\PYZus{}predicted\PYZus{}t} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num = }\PY{l+s+si}{\PYZob{}num\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{num}\PY{o}{=}\PY{n}{num} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y\PYZus{}predicted\PYZus{}t}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y\PYZus{}predicted}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+num = 1
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_93_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+num = 2
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_93_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+num = 3
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_93_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+num = 4
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_93_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+num = 5
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_93_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+num = 6
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_93_11.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+num = 7
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_93_13.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+num = 8
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_93_15.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+num = 9
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_93_17.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+num = 10
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_93_19.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+num = 11
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_93_21.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+num = 12
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_93_23.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{ux43cux43eux436ux43dux43e-ux43eux43aux440ux443ux433ux43bux438ux442ux44c-ux434ux43e-3-ux437ux43dux430ux43aux43eux432-ux43fux43eux441ux43bux435-ux437ux430ux43fux44fux442ux43eux439}{%
+\paragraph{Можно округлить до 3+ знаков после
+запятой(!)}\label{ux43cux43eux436ux43dux43e-ux43eux43aux440ux443ux433ux43bux438ux442ux44c-ux434ux43e-3-ux437ux43dux430ux43aux43eux432-ux43fux43eux441ux43bux435-ux437ux430ux43fux44fux442ux43eux439}}
+
+    \hypertarget{task-5}{%
+\subsection{Task 5}\label{task-5}}
+
+    \hypertarget{ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux44bux435-ux43fux43eux43bux43eux441ux44b-ux434ux43bux44f-ux43fux440ux43eux433ux43dux43eux437ux430-ux438-ux43eux442ux43aux43bux438ux43aux430-ux43cux43eux434ux435ux43bux438}{%
+\subsubsection{Доверительные полосы для прогноза и отклика
+модели}\label{ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux44bux435-ux43fux43eux43bux43eux441ux44b-ux434ux43bux44f-ux43fux440ux43eux433ux43dux43eux437ux430-ux438-ux43eux442ux43aux43bux438ux43aux430-ux43cux43eux434ux435ux43bux438}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{,} \PY{n}{x}\PY{p}{,}  \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{3}\PY{p}{,} 
+                             \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{17} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,} 
+                             \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{17} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,}
+                             \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{33} \PY{o}{*} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.3}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{n}{n} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{m} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{n}{clf} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{n}{fit\PYZus{}intercept}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}73}]:} LinearRegression(copy\_X=True, fit\_intercept=False, n\_jobs=1, normalize=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{n}{y\PYZus{}predicted} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)} 
+         \PY{n}{e\PYZus{}all} \PY{o}{=} \PY{n}{y\PYZus{}predicted} \PY{o}{\PYZhy{}} \PY{n}{y}
+         \PY{n}{S} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{e\PYZus{}all} \PY{o}{*} \PY{n}{e\PYZus{}all}\PY{p}{)}
+         \PY{n}{R} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{e\PYZus{}all} \PY{o}{*} \PY{n}{e\PYZus{}all}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{sigma} \PY{o}{=} \PY{n}{S} \PY{o}{/} \PY{p}{(}\PY{n}{n} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{n}{L} \PY{o}{=} \PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{ux440ux430ux441ux447ux435ux442-ux442ux43eux447ux435ux43a-ux434ux43bux44f-ux43fux43eux441ux442ux440ux43eux435ux43dux438ux44f-ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux43eux439-ux43fux43eux43bux43eux441ux44b-ux43eux442ux43aux43bux438ux43aux430}{%
+\paragraph{Расчет точек для построения доверительной полосы
+отклика}\label{ux440ux430ux441ux447ux435ux442-ux442ux43eux447ux435ux43a-ux434ux43bux44f-ux43fux43eux441ux442ux440ux43eux435ux43dux438ux44f-ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux43eux439-ux43fux43eux43bux43eux441ux44b-ux43eux442ux43aux43bux438ux43aux430}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{n}{XL\PYZus{}L} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{XL\PYZus{}R} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{row\PYZus{}index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{row} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{row\PYZus{}index}\PY{p}{,} \PY{p}{:}\PY{p}{]}
+             \PY{n}{y\PYZus{}p} \PY{o}{=} \PY{n}{y\PYZus{}predicted}\PY{p}{[}\PY{n}{row\PYZus{}index}\PY{p}{]}
+             
+             \PY{n}{p} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{row}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{L}\PY{p}{)}
+             \PY{n}{p} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{p}\PY{p}{,} \PY{n}{row}\PY{p}{)}
+             
+             \PY{n}{XL\PYZus{}R}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{y\PYZus{}p} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{p} \PY{o}{*} \PY{n}{sigma}\PY{p}{)} \PY{o}{*} \PY{n}{t}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{alpha} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{df}\PY{o}{=}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{n}{m}\PY{p}{)}\PY{p}{)}
+             \PY{n}{XL\PYZus{}L}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{y\PYZus{}p} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{p} \PY{o}{*} \PY{n}{sigma}\PY{p}{)} \PY{o}{*} \PY{n}{t}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{alpha} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{df}\PY{o}{=}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{n}{m}\PY{p}{)}\PY{p}{)}    
+\end{Verbatim}
+
+
+    \hypertarget{ux440ux430ux441ux447ux435ux442-ux442ux43eux447ux435ux43a-ux434ux43bux44f-ux43fux43eux441ux442ux440ux43eux435ux43dux438ux44f-ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux43eux439-ux43fux43eux43bux43eux441ux44b-ux43fux440ux43eux433ux43dux43eux437ux430}{%
+\paragraph{Расчет точек для построения доверительной полосы
+прогноза}\label{ux440ux430ux441ux447ux435ux442-ux442ux43eux447ux435ux43a-ux434ux43bux44f-ux43fux43eux441ux442ux440ux43eux435ux43dux438ux44f-ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux43eux439-ux43fux43eux43bux43eux441ux44b-ux43fux440ux43eux433ux43dux43eux437ux430}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{n}{\PYZus{}XL\PYZus{}L} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{\PYZus{}XL\PYZus{}R} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{row\PYZus{}index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{row} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{row\PYZus{}index}\PY{p}{,} \PY{p}{:}\PY{p}{]}
+             \PY{n}{y\PYZus{}p} \PY{o}{=} \PY{n}{y\PYZus{}predicted}\PY{p}{[}\PY{n}{row\PYZus{}index}\PY{p}{]}
+             
+             \PY{n}{p} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{row}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{L}\PY{p}{)}
+             \PY{n}{p} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{p}\PY{p}{,} \PY{n}{row}\PY{p}{)}
+             
+             \PY{n}{\PYZus{}XL\PYZus{}R}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{y\PYZus{}p} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{n}{p} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{n}{sigma}\PY{p}{)} \PY{o}{*} \PY{n}{t}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{alpha} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{df}\PY{o}{=}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{n}{m}\PY{p}{)}\PY{p}{)}
+             \PY{n}{\PYZus{}XL\PYZus{}L}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{y\PYZus{}p} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{n}{p} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{n}{sigma}\PY{p}{)} \PY{o}{*} \PY{n}{t}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{alpha} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{df}\PY{o}{=}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{n}{m}\PY{p}{)}\PY{p}{)}    
+\end{Verbatim}
+
+
+    \hypertarget{ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux430ux44f-ux43fux43eux43bux43eux441ux430-ux43fux440ux43eux433ux43dux43eux437ux430}{%
+\paragraph{Доверительная полоса
+прогноза}\label{ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux430ux44f-ux43fux43eux43bux43eux441ux430-ux43fux440ux43eux433ux43dux43eux437ux430}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{XL\PYZus{}L}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{XL\PYZus{}R}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_107_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux430ux44f-ux43fux43eux43bux43eux441ux430-ux43eux442ux43aux43bux438ux43aux430}{%
+\paragraph{Доверительная полоса
+отклика}\label{ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux430ux44f-ux43fux43eux43bux43eux441ux430-ux43eux442ux43aux43bux438ux43aux430}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{\PYZus{}XL\PYZus{}L}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{\PYZus{}XL\PYZus{}R}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_109_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{ux441ux43eux432ux43cux435ux441ux442ux43dux44bux439-ux433ux440ux430ux444ux438ux43a}{%
+\paragraph{Совместный
+график}\label{ux441ux43eux432ux43cux435ux441ux442ux43dux44bux439-ux433ux440ux430ux444ux438ux43a}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{XL\PYZus{}L}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{XL\PYZus{}R}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{\PYZus{}XL\PYZus{}L}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{\PYZus{}XL\PYZus{}R}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_111_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{lab-3}{%
+\subsection{Lab 3}\label{lab-3}}
+
+    \hypertarget{task-1}{%
+\subsubsection{Task 1}\label{task-1}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}158}]:} \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{,} \PY{n}{x}\PY{p}{,}  \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{3}\PY{p}{,} 
+                              \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{17} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,} 
+                              \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{17} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,}
+                              \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{33} \PY{o}{*} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.3}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}159}]:} \PY{n}{n} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          \PY{n}{m} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}160}]:} \PY{n}{clf} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{n}{fit\PYZus{}intercept}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}160}]:} LinearRegression(copy\_X=True, fit\_intercept=False, n\_jobs=1, normalize=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}161}]:} \PY{n}{y\PYZus{}predicted} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)} 
+          \PY{n}{e\PYZus{}all} \PY{o}{=} \PY{n}{y\PYZus{}predicted} \PY{o}{\PYZhy{}} \PY{n}{y}
+          \PY{n}{S} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{e\PYZus{}all} \PY{o}{*} \PY{n}{e\PYZus{}all}\PY{p}{)}
+          \PY{n}{R} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{e\PYZus{}all} \PY{o}{*} \PY{n}{e\PYZus{}all}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{sigma} \PY{o}{=} \PY{n}{S} \PY{o}{/} \PY{p}{(}\PY{n}{n} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{p}{)}
+          \PY{n}{errors} \PY{o}{=} \PY{n}{e\PYZus{}all}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+          
+          \PY{n}{errors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{errors}\PY{p}{)}
+          \PY{n}{normed\PYZus{}errors} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{errors}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{errors}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{errors}\PY{p}{)}
+          
+          \PY{n}{norm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{n}{normed\PYZus{}errors}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}162}]:} \PY{c+c1}{\PYZsh{} Декомпозиция выборки на groups\PYZus{}count выборок}
+          \PY{k}{def} \PY{n+nf}{un\PYZus{}group}\PY{p}{(}\PY{n}{array}\PY{p}{,} \PY{n}{groups\PYZus{}count}\PY{p}{)}\PY{p}{:}
+              \PY{k}{assert} \PY{n+nb}{len}\PY{p}{(}\PY{n}{array}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{n}{groups\PYZus{}count} \PY{o}{==} \PY{l+m+mi}{0}
+              
+              \PY{n}{groups} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+              \PY{n}{group\PYZus{}size} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{array}\PY{p}{)} \PY{o}{/}\PY{o}{/} \PY{n}{groups\PYZus{}count}
+              \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{groups\PYZus{}count}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{groups}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{array}\PY{p}{[}\PY{n}{k} \PY{o}{*} \PY{n}{group\PYZus{}size}\PY{p}{:} \PY{p}{(}\PY{n}{k} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{n}{group\PYZus{}size}\PY{p}{]}\PY{p}{)}
+          
+              \PY{k}{return} \PY{n}{groups}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}171}]:} \PY{n}{errors} \PY{o}{=} \PY{n}{e\PYZus{}all}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1300}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+          \PY{n}{grouped\PYZus{}errors} \PY{o}{=} \PY{n}{un\PYZus{}group}\PY{p}{(}\PY{n}{errors}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}
+          \PY{n}{statistic}\PY{p}{,} \PY{n}{p\PYZus{}value} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{f\PYZus{}oneway}\PY{p}{(}\PY{o}{*}\PY{n}{grouped\PYZus{}errors}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}170}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Значение статистики: }\PY{l+s+si}{\PYZob{}stat\PYZcb{}}\PY{l+s+s1}{, p\PYZus{}value: }\PY{l+s+si}{\PYZob{}p\PYZus{}value\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{stat}\PY{o}{=}\PY{n}{statistic}\PY{p}{,} \PY{n}{p\PYZus{}value}\PY{o}{=}\PY{n}{p\PYZus{}value}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Значение статистики: 2.8306676260862016, p\_value: 0.002660616138181588
+
+    \end{Verbatim}
+
+    p\_value - имеет значение меньшее, чем 0.01, следовательно гипотеза о
+постоянстве математического ожидания не отвергается
+
+    \hypertarget{plot-ux43eux441ux442ux430ux442ux43aux43eux432}{%
+\paragraph{Plot
+остатков}\label{plot-ux43eux441ux442ux430ux442ux43aux43eux432}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}164}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{e\PYZus{}all}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_123_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{boxplot-ux441ux440ux435ux434ux43dux438ux445-ux438ux437-ux434ux438ux441ux43fux435ux440ux441ux438ux43eux43dux43dux43eux433ux43e-ux430ux43dux430ux43bux438ux437ux430-anova}{%
+\paragraph{Boxplot средних из дисперсионного анализа
+ANOVA}\label{boxplot-ux441ux440ux435ux434ux43dux438ux445-ux438ux437-ux434ux438ux441ux43fux435ux440ux441ux438ux43eux43dux43dux43eux433ux43e-ux430ux43dux430ux43bux438ux437ux430-anova}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}165}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+          \PY{n}{ans} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{grouped\PYZus{}errors}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_125_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{task-2}{%
+\subsubsection{Task 2}\label{task-2}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}172}]:} \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{,} \PY{n}{x}\PY{p}{,}  \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{3}\PY{p}{,} 
+                              \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{17} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,} 
+                              \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{17} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,}
+                              \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{33} \PY{o}{*} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.3}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}173}]:} \PY{n}{n} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          \PY{n}{m} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}174}]:} \PY{n}{clf} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{n}{fit\PYZus{}intercept}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}151}]:} \PY{n}{y\PYZus{}predicted} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)} 
+          \PY{n}{e\PYZus{}all} \PY{o}{=} \PY{n}{y\PYZus{}predicted} \PY{o}{\PYZhy{}} \PY{n}{y}
+          \PY{n}{e\PYZus{}all\PYZus{}squared} \PY{o}{=} \PY{n}{e\PYZus{}all} \PY{o}{*} \PY{n}{e\PYZus{}all}
+          \PY{n}{S} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{e\PYZus{}all} \PY{o}{*} \PY{n}{e\PYZus{}all}\PY{p}{)}
+          \PY{n}{R} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{e\PYZus{}all} \PY{o}{*} \PY{n}{e\PYZus{}all}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{sigma} \PY{o}{=} \PY{n}{S} \PY{o}{/} \PY{p}{(}\PY{n}{n} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} errors = e\PYZus{}all[:, 0]}
+          \PY{c+c1}{\PYZsh{} errors = np.sort(errors)}
+          \PY{c+c1}{\PYZsh{} normed\PYZus{}errors = (np.mean(errors) \PYZhy{} errors) / np.std(errors)}
+          \PY{c+c1}{\PYZsh{} norm = np.sort(np.random.normal(size=normed\PYZus{}errors.shape[0]))}
+\end{Verbatim}
+
+
+    \hypertarget{plot-ux434ux43bux44f-e_i2}{%
+\paragraph{Plot для \$ e\_i\^{}2 \$}\label{plot-ux434ux43bux44f-e_i2}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}152}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{e\PYZus{}all\PYZus{}squared}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_132_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}169}]:} \PY{n}{errors} \PY{o}{=} \PY{n}{e\PYZus{}all\PYZus{}squared}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1300}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+          \PY{n}{grouped\PYZus{}errors} \PY{o}{=} \PY{n}{un\PYZus{}group}\PY{p}{(}\PY{n}{errors}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}
+          \PY{n}{statistic}\PY{p}{,} \PY{n}{p\PYZus{}value} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{f\PYZus{}oneway}\PY{p}{(}\PY{o}{*}\PY{n}{grouped\PYZus{}errors}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}175}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Значение статистики: }\PY{l+s+si}{\PYZob{}stat\PYZcb{}}\PY{l+s+s1}{, p\PYZus{}value: }\PY{l+s+si}{\PYZob{}p\PYZus{}value\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{stat}\PY{o}{=}\PY{n}{statistic}\PY{p}{,} \PY{n}{p\PYZus{}value}\PY{o}{=}\PY{n}{p\PYZus{}value}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Значение статистики: 2.9880997380081564, p\_value: 0.0015746835010985436
+
+    \end{Verbatim}
+
+    p\_value - имеет значение меньшее, чем 0.01, следовательно гипотеза о
+постоянстве дисперсии не отвергается
+
+    \hypertarget{boxplot-ux434ux43bux44f-e_i2}{%
+\paragraph{Boxplot для \$ e\_i\^{}2
+\$}\label{boxplot-ux434ux43bux44f-e_i2}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}168}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+          \PY{n}{ans} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{grouped\PYZus{}errors}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_137_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{task-3}{%
+\subsubsection{Task 3}\label{task-3}}
+
+    \hypertarget{task-4}{%
+\subsubsection{Task 4}\label{task-4}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{,} \PY{n}{x}\PY{p}{,}  \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{3}\PY{p}{,} 
+                             \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{17} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,} 
+                             \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{17} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,}
+                             \PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{33} \PY{o}{*} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.3}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}82}]:} \PY{n}{n} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{m} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{n}{clf} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{n}{fit\PYZus{}intercept}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}83}]:} LinearRegression(copy\_X=True, fit\_intercept=False, n\_jobs=1, normalize=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{n}{y\PYZus{}predicted} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)} 
+         \PY{n}{e\PYZus{}all} \PY{o}{=} \PY{n}{y\PYZus{}predicted} \PY{o}{\PYZhy{}} \PY{n}{y}
+         \PY{n}{S} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{e\PYZus{}all} \PY{o}{*} \PY{n}{e\PYZus{}all}\PY{p}{)}
+         \PY{n}{R} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{e\PYZus{}all} \PY{o}{*} \PY{n}{e\PYZus{}all}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{sigma} \PY{o}{=} \PY{n}{S} \PY{o}{/} \PY{p}{(}\PY{n}{n} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{p}{)}
+         \PY{n}{errors} \PY{o}{=} \PY{n}{e\PYZus{}all}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{n}{errors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{errors}\PY{p}{)}
+         \PY{n}{normed\PYZus{}errors} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{errors}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{errors}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{errors}\PY{p}{)}
+         
+         \PY{n}{norm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{n}{normed\PYZus{}errors}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{35}
+\end{Verbatim}
+
+
+    \hypertarget{ux433ux438ux441ux442ux43eux433ux440ux430ux43cux43cux430-ux43eux448ux438ux431ux43eux43a-ux441ux43eux432ux43cux435ux441ux442ux43dux43e-ux441-ux43fux43bux43eux442ux43dux43eux441ux442ux44cux44e-ux43dux43eux440ux43cux430ux43bux44cux43dux43eux433ux43e-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux44f}{%
+\paragraph{Гистограмма ошибок совместно с плотностью нормального
+распределения}\label{ux433ux438ux441ux442ux43eux433ux440ux430ux43cux43cux430-ux43eux448ux438ux431ux43eux43a-ux441ux43eux432ux43cux435ux441ux442ux43dux43e-ux441-ux43fux43bux43eux442ux43dux43eux441ux442ux44cux44e-ux43dux43eux440ux43cux430ux43bux44cux43dux43eux433ux43e-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux44f}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{k+kn}{import} \PY{n+nn}{scipy}
+         
+         \PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{normed\PYZus{}errors}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{n}{bins}\PY{p}{,} \PY{n}{histtype}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{density}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{scipy}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_146_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{ux432ux435ux440ux43eux44fux442ux43dux43eux441ux442ux43dux430ux44f-ux431ux443ux43cux430ux433ux430-ux434ux43bux44f-ux43eux448ux438ux431ux43eux43a}{%
+\paragraph{Вероятностная бумага для
+ошибок}\label{ux432ux435ux440ux43eux44fux442ux43dux43eux441ux442ux43dux430ux44f-ux431ux443ux43cux430ux433ux430-ux434ux43bux44f-ux43eux448ux438ux431ux43eux43a}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}87}]:} \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{stats}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         
+         \PY{p}{(}\PY{n}{quantiles}\PY{p}{,} \PY{n}{values}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{slope}\PY{p}{,} \PY{n}{intercept}\PY{p}{,} \PY{n}{r}\PY{p}{)} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{probplot}\PY{p}{(}\PY{n}{normed\PYZus{}errors}\PY{p}{,} \PY{n}{dist}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{norm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{values}\PY{p}{,} \PY{n}{quantiles}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{quantiles} \PY{o}{*} \PY{n}{slope} \PY{o}{+} \PY{n}{intercept}\PY{p}{,} \PY{n}{quantiles}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{ticks\PYZus{}perc} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{80}\PY{p}{,} \PY{l+m+mi}{90}\PY{p}{,} \PY{l+m+mi}{95}\PY{p}{,} \PY{l+m+mi}{99}\PY{p}{]}
+         
+         \PY{n}{ticks\PYZus{}quan} \PY{o}{=} \PY{p}{[}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mf}{100.}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{ticks\PYZus{}perc}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{ticks\PYZus{}quan}\PY{p}{,} \PY{n}{ticks\PYZus{}perc}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_148_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
